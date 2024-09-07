@@ -4,8 +4,6 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: localhost:storage-of-user-information:8080
-    hostname: localhost
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/

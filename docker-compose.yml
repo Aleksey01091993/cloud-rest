@@ -2,11 +2,67 @@ version: '3.8'
 services:
   eureka-server:
     build: /eureka-server
-    image: eureka_image
-    container_name: eureka_container
+    image: eureka-server-image
+    container_name: eureka-server-container
     ports:
-      - "8761:8761"
+        - "8761:8761"
     environment:
-      - EUREKA_SERVER_PORT=8761
-      - EUREKA_SERVER_INSTANCE_HOST=localhost
-      - EUREKA_SERVER_CLIENT_DEFAULT_ZONE=http://localhost:8761/eureka/
+      server.port: 8761
+      eureka.instance.hostname: localhost
+      eureka.client.register-with-eureka: false
+      eureka.client.fetch-registry: false
+      eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+  storage-user:
+    build: /storage-of-user-information
+    image: storage_user_image
+    container_name: storage_user_name
+    depends_on:
+      - eureka-server
+    ports:
+      - "8080:8080"
+    environment:
+      server.port: 8080
+      spring.application.name: storage-of-user-information
+      eureka.instance.prefer-ip-address: true
+      eureka.client.service-url.defaultZone: http://eureka-server:8761/eureka/
+  find-by-user:
+    build: /find-by-user-information
+    image: user_information_image
+    container_name: user_information_container
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+    environment:
+      userinfo.base-uri: lb://storage-of-user-information
+      server.port: 8081
+      spring.application.name: find-by-user-information
+      eureka.instance.prefer-ip-address: true
+      eureka.client.service-url.defaultZone: http://eureka-server:8761/eureka/
+  find-by-company:
+    build: /find-by-company-information
+    image: company_information_image
+    container_name: company_information_container
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+    environment:
+      userinfo.base-uri: lb://storage-of-company-information
+      server.port: 8082
+      spring.application.name: find-by-company-information
+      eureka.instance.prefer-ip-address: true
+      eureka.client.service-url.defaultZone: http://eureka-server:8761/eureka/
+  storage-company:
+    build: /storage-of-company-information
+    image: storage_company_image
+    container_name: storage_company_name
+    depends_on:
+      - eureka-server
+    ports:
+      - "8083:8083"
+    environment:
+      server.port: 8083
+      spring.application.name: storage-of-company-information
+      eureka.instance.prefer-ip-address: true
+      eureka.client.service-url.defaultZone: http://eureka-server:8761/eureka/

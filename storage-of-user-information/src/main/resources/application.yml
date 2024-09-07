@@ -1,6 +1,6 @@
 spring:
   application:
-    name: storage-of-user-information
+     name: storage-of-user-information
 eureka:
   instance:
     prefer-ip-address: true
