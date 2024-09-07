@@ -6,10 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class FindByUserInformation {
-
+public class FindByCompanyInformation {
     public static void main(String[] args) {
-        SpringApplication.run(FindByUserInformation.class, args);
+        SpringApplication.run(FindByCompanyInformation.class, args);
     }
-
 }

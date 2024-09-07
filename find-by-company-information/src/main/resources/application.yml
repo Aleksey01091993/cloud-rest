@@ -1,10 +1,10 @@
 userinfo:
-  base-uri: lb://storage-of-user-information
+  base-uri: lb://storage-of-company-information
 server:
-  port: 8081
+  port: 8082
 spring:
   application:
-    name: find-by-user-information
+    name: find-by-company-information
 eureka:
   instance:
     prefer-ip-address: true

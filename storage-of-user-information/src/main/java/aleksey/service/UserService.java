@@ -14,8 +14,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserResponse getByFirstName(String firstName) {
-        return UserMapper.mapOfUser(userRepository.findByFirstName(firstName)
+    public UserResponse getByLastName(String lastName) {
+        return UserMapper.mapOfUser(userRepository.findByLastName(lastName)
         .orElseThrow(() -> new RuntimeException("User not found")));
     }
 
