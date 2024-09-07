@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-
+@Table
 @Getter
 @Setter
 @Entity
